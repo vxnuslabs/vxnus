@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 
 import { PublicPage } from "@/components/public-page";
 import { ArticleList } from "@/components/article-list";
@@ -16,7 +15,6 @@ export default async function Home() {
         <section className="home-intro">
           <p className="intro-kicker">{profile.positioning}</p>
           <h1>
-            <Image src="/logo.svg" alt="" width={48} height={48} style={{ display: 'block', height: '0.8em', width: 'auto', marginBottom: '0.2em' }} />
             {profile.name}
           </h1>
           <div className="intro-statement">

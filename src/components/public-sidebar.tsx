@@ -1,8 +1,8 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import Image from "next/image";
 
 const navigation = [
   { href: "/", label: "HOME" },
@@ -14,12 +14,33 @@ const navigation = [
 
 export function PublicSidebar() {
   const pathname = usePathname();
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
 
   return (
-    <aside className="public-sidebar">
+    <>
+      <button 
+        className="mobile-sidebar-toggle" 
+        onClick={() => setIsOpen(!isOpen)}
+        aria-label="Toggle menu"
+      >
+        {isOpen ? (
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        ) : (
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        )}
+      </button>
+
+      {isOpen && (
+        <div className="mobile-sidebar-backdrop" onClick={() => setIsOpen(false)} />
+      )}
+
+      <aside className={`public-sidebar ${isOpen ? "open" : ""}`}>
       <div className="sidebar-top">
         <Link className="sidebar-wordmark" href="/" aria-label="VXNUS home" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <Image src="/logo.svg" alt="" width={24} height={24} style={{ display: 'block', height: '1em', width: 'auto', filter: 'invert(1)' }} />
           VXNUS
         </Link>
         <div className="sidebar-graphic">
@@ -51,5 +72,6 @@ export function PublicSidebar() {
 
 
     </aside>
+    </>
   );
 }
