@@ -1827,10 +1827,6 @@ a {
   letter-spacing: 0.04em;
   color: var(--muted);
   text-transform: uppercase;
-  position: sticky;
-  top: 0;
-  z-index: 40;
-  background-color: var(--background);
 }
 
 /* Hide the old public-header rules if they interfere, though we renamed the class */
@@ -1870,6 +1866,10 @@ a {
   .public-header-utility {
     justify-content: center;
     padding-left: 0;
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background-color: var(--background);
   }
 
   .time-display, .stay-curious, .header-note {
