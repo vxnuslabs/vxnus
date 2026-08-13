@@ -16,6 +16,7 @@ export function PublicNav() {
     <header className="public-header-utility">
       <div className="time-display">UTC+7 {time}</div>
       <div className="header-note">TECHNOLOGY / IMAGINATION / UNIVERSE</div>
+      <div className="mobile-brand">VXNUS</div>
       <div className="stay-curious">STAY CURIOUS</div>
     </header>
   );

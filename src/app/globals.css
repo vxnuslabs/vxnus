@@ -1842,6 +1842,10 @@ a {
   display: none;
 }
 
+.mobile-brand {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .mobile-sidebar-toggle {
     display: flex;
@@ -1853,15 +1857,26 @@ a {
     z-index: 50;
     width: 3rem;
     height: 3rem;
-    background: #0c0c0c;
+    background: transparent;
     color: #fff;
-    border: 1px solid #333;
-    border-radius: 50%;
+    border: none;
     cursor: pointer;
   }
 
   .public-header-utility {
-    padding-left: 4rem;
+    justify-content: center;
+    padding-left: 0;
+  }
+
+  .time-display, .stay-curious, .header-note {
+    display: none;
+  }
+
+  .mobile-brand {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: bold;
+    letter-spacing: 0.1em;
   }
 
   .mobile-sidebar-backdrop {
