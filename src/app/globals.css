@@ -1813,7 +1813,7 @@ a {
   flex-grow: 1;
   background-color: var(--background);
   min-width: 0;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 .public-header-utility {
