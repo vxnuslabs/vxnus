@@ -11,7 +11,7 @@ export function ArticleList({ articles }: { articles: PublicArticle[] }) {
     <div className="article-list">
       {articles.map((article, index) => (
         <article className="article-row" key={article.id}>
-          <span className="article-index">VX-26-{articles.length - index}</span>
+          <span className="article-index">{String(index + 1).padStart(2, "0")}</span>
           <div className="article-copy">
             <p className="meta-line">
               {article.articleId}
