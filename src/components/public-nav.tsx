@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export function PublicNav() {
@@ -16,7 +17,7 @@ export function PublicNav() {
     <header className="public-header-utility">
       <div className="time-display">UTC+7 {time}</div>
       <div className="header-note">TECHNOLOGY / IMAGINATION / UNIVERSE</div>
-      <div className="mobile-brand">VXNUS</div>
+      <Link href="/" className="mobile-brand" style={{ textDecoration: 'none', color: 'inherit' }}>VXNUS</Link>
       <div className="stay-curious">STAY CURIOUS</div>
     </header>
   );
