@@ -3,6 +3,14 @@ import Link from "next/link";
 import { PublicPage } from "@/components/public-page";
 import { ArticleList } from "@/components/article-list";
 import { getPublicProfile, getPublicArticle } from "@/lib/content";
+import { createMetadata } from "@/lib/seo";
+import { site } from "@/lib/site";
+
+export const metadata = createMetadata({
+  title: site.name,
+  description: site.description,
+  path: "/",
+});
 
 export const dynamic = "force-dynamic";
 

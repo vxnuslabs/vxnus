@@ -1847,7 +1847,7 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
-    position: fixed;
+    position: absolute;
     top: 1rem;
     left: 1rem;
     z-index: 50;
@@ -1858,6 +1858,10 @@ a {
     border: 1px solid #333;
     border-radius: 50%;
     cursor: pointer;
+  }
+
+  .public-header-utility {
+    padding-left: 4rem;
   }
 
   .mobile-sidebar-backdrop {
