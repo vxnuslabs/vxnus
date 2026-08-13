@@ -1888,7 +1888,7 @@ a {
     position: fixed;
     inset: 0;
     background: rgba(0,0,0,0.5);
-    z-index: 30;
+    z-index: 90;
     backdrop-filter: blur(4px);
   }
 
@@ -1901,7 +1901,7 @@ a {
     left: 0;
     width: 280px;
     height: 100vh;
-    z-index: 40;
+    z-index: 100;
     transform: translateX(-100%);
     transition: transform 0.3s ease-in-out;
     padding: 2rem;
