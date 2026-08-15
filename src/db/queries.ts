@@ -147,3 +147,16 @@ export async function createWorkEntryDraft(db: Database, input: WorkEntryInput) 
     status: "draft",
   }).returning({ id: workEntries.id, slug: workEntries.slug }).then(res => res[0]);
 }
+
+export async function setWorkStatus(db: Database, id: number, status: "draft" | "published" | "archived") {
+  return db
+    .update(workEntries)
+    .set({
+      status,
+      publishedAt: status === "published" ? new Date() : null,
+      updatedAt: new Date(),
+    })
+    .where(eq(workEntries.id, id))
+    .returning({ id: workEntries.id, slug: workEntries.slug, status: workEntries.status })
+    .then(res => res[0]);
+}

@@ -77,3 +77,39 @@ export async function getAdminArticleArticle(id: number): Promise<AdminArticleAr
 
   return { ...publicArticle, status: "published" as const };
 }
+
+export type AdminWorkSummary = {
+  id: number;
+  slug: string;
+  type: "open_source" | "project";
+  title: string;
+  status: "draft" | "published" | "archived";
+  updatedAt: Date;
+};
+
+export async function getAdminWork(): Promise<AdminWorkSummary[]> {
+  const connectionString = process.env.DATABASE_URL;
+  if (connectionString) {
+    const { getAllWork } = await import("@/db/queries");
+    const entries = await getAllWork(createDb(connectionString));
+    return entries.map((entry) => ({
+      id: entry.id,
+      slug: entry.slug,
+      type: entry.type as "open_source" | "project",
+      title: entry.title,
+      status: entry.status as "draft" | "published" | "archived",
+      updatedAt: entry.updatedAt,
+    }));
+  }
+
+  const { getPublicWork } = await import("@/lib/content");
+  const entries = await getPublicWork();
+  return entries.map((entry) => ({
+    id: entry.id,
+    slug: entry.slug,
+    type: entry.type as "open_source" | "project",
+    title: entry.title,
+    status: "published",
+    updatedAt: entry.publishedAt ?? new Date(),
+  }));
+}

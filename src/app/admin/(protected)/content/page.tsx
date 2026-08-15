@@ -1,7 +1,7 @@
 import Link from "next/link";
 
-import { changeArticleStatus } from "@/app/admin/actions";
-import { getAdminArticle } from "@/lib/admin-content";
+import { changeArticleStatus, changeWorkStatus } from "@/app/admin/actions";
+import { getAdminArticle, getAdminWork } from "@/lib/admin-content";
 
 export const metadata = { title: "Content — VXNUS", robots: { index: false, follow: false } };
 
@@ -13,12 +13,20 @@ export default async function AdminContentPage({ searchParams }: ContentPageProp
   const params = await searchParams;
   const query = params.q?.toLowerCase().trim() ?? "";
   const statusFilter = ["draft", "published", "archived"].includes(params.status ?? "") ? params.status : "";
+  
   const article = (await getAdminArticle())
     .filter((article) =>
       (!query || `${article.title} ${article.articleId}`.toLowerCase().includes(query)) &&
       (statusFilter ? article.status === statusFilter : article.status !== "archived"),
     )
     .sort((a, b) => b.articleId.localeCompare(a.articleId, undefined, { numeric: true }));
+
+  const work = (await getAdminWork())
+    .filter((w) =>
+      (!query || `${w.title} ${w.slug}`.toLowerCase().includes(query)) &&
+      (statusFilter ? w.status === statusFilter : w.status !== "archived"),
+    )
+    .sort((a, b) => b.updatedAt.getTime() - a.updatedAt.getTime());
 
   return (
     <main className="admin-main">
@@ -51,12 +59,39 @@ export default async function AdminContentPage({ searchParams }: ContentPageProp
 
       <section className="admin-section">
         <div className="admin-section-heading">
+          <h2>Work / {work.length}</h2>
+          <span className="admin-muted">All work states</span>
+        </div>
+        <div className="admin-record-list">
+          {work.map((w) => (
+            <div className="admin-record admin-record-with-actions" key={`work-${w.id}`}>
+              <span className="admin-muted">{w.type === "open_source" ? "Open Source" : "Project"}</span>
+              <strong>{w.title}</strong>
+              <span className={`admin-status admin-status-${w.status}`}>{w.status}</span>
+              <time dateTime={w.updatedAt.toISOString()}>{formatDate(w.updatedAt)}</time>
+              <form className="admin-inline-actions" action={changeWorkStatus}>
+                <input type="hidden" name="id" value={w.id} />
+                <input type="hidden" name="status" value={w.status === "published" ? "draft" : "published"} />
+                <button className="admin-text-button" type="submit">{w.status === "published" ? "Unpublish" : "Publish"}</button>
+              </form>
+              <form className="admin-inline-actions" action={changeWorkStatus}>
+                <input type="hidden" name="id" value={w.id} />
+                <input type="hidden" name="status" value="archived" />
+                <button className="admin-text-button" type="submit">Archive</button>
+              </form>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="admin-section">
+        <div className="admin-section-heading">
           <h2>Article / {article.length}</h2>
           <span className="admin-muted">All article states</span>
         </div>
         <div className="admin-record-list">
           {article.map((article) => (
-            <div className="admin-record admin-record-with-actions" key={article.id}>
+            <div className="admin-record admin-record-with-actions" key={`article-${article.id}`}>
               <span>{article.articleId}</span>
               <Link href={`/admin/article/${article.id}/edit`}><strong>{article.title}</strong></Link>
               <span className={`admin-status admin-status-${article.status}`}>{article.status}</span>

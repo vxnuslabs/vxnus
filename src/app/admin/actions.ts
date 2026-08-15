@@ -135,6 +135,30 @@ export async function changeArticleStatus(formData: FormData) {
   redirect(result?.status === "published" ? "/admin/content?saved=published" : "/admin/content?saved=updated");
 }
 
+export async function changeWorkStatus(formData: FormData) {
+  await requireAdmin();
+  const id = Number(field(formData, "id"));
+  const status = field(formData, "status");
+
+  if (!Number.isInteger(id) || !["draft", "published", "archived"].includes(status)) {
+    redirect("/admin/content?error=invalid-status");
+  }
+
+  let result: { id: number; slug: string; status: "draft" | "published" | "archived" } | undefined;
+  try {
+    const { setWorkStatus } = await import("@/db/queries");
+    result = await setWorkStatus(getAdminDatabase(), id, status as "draft" | "published" | "archived");
+  } catch {
+    redirect("/admin/content?error=database");
+  }
+
+  if (result) {
+    revalidatePath("/projects", "page");
+    revalidatePath("/open-source", "page");
+  }
+  redirect(result?.status === "published" ? "/admin/content?saved=published" : "/admin/content?saved=updated");
+}
+
 export async function saveWorkEntry(
   _state: AdminActionState,
   formData: FormData,
