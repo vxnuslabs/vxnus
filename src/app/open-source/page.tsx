@@ -1,4 +1,5 @@
 import { ArchivePage } from "@/components/archive-page";
+import { WorkList } from "@/components/work-list";
 import { getPublicWork } from "@/lib/content";
 import { createMetadata } from "@/lib/seo";
 
@@ -13,9 +14,7 @@ export default async function OpenSourcePage() {
 
   return (
     <ArchivePage title="Open source" description="Tools and systems shared for others to inspect and use.">
-      <p className="empty-state">
-        {work.length > 0 ? "Open-source archive coming into view." : "No open-source work has been published yet."}
-      </p>
+      <WorkList work={work} emptyMessage="No open-source work has been published yet." />
     </ArchivePage>
   );
 }

@@ -1,4 +1,5 @@
 import { ArchivePage } from "@/components/archive-page";
+import { WorkList } from "@/components/work-list";
 import { getPublicWork } from "@/lib/content";
 import { createMetadata } from "@/lib/seo";
 
@@ -13,9 +14,7 @@ export default async function ProjectsPage() {
 
   return (
     <ArchivePage title="Projects" description="Work that has moved from an investigation into something useful.">
-      <p className="empty-state">
-        {work.length > 0 ? "Project archive coming into view." : "No projects have been published yet."}
-      </p>
+      <WorkList work={work} emptyMessage="No projects have been published yet." />
     </ArchivePage>
   );
 }
