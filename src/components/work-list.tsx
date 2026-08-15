@@ -14,17 +14,9 @@ export function WorkList({ work, emptyMessage }: { work: PublicWork[], emptyMess
           <span className="article-index">{String(index + 1).padStart(2, "0")}</span>
           <div className="article-copy">
             <h3>
-              {item.externalUrl ? (
-                <a className="article-title-link" href={item.externalUrl} target="_blank" rel="noopener noreferrer">
-                  {item.title}
-                </a>
-              ) : item.repositoryUrl ? (
-                <a className="article-title-link" href={item.repositoryUrl} target="_blank" rel="noopener noreferrer">
-                  {item.title}
-                </a>
-              ) : (
-                <span className="article-title-link">{item.title}</span>
-              )}
+              <Link className="article-title-link" href={`/${item.type === "open_source" ? "open-source" : "projects"}/${item.slug}`}>
+                {item.title}
+              </Link>
             </h3>
             <p>{item.summary}</p>
           </div>

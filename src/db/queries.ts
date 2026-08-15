@@ -85,6 +85,15 @@ export function getPublishedWork(db: Database) {
     .orderBy(desc(workEntries.publishedAt));
 }
 
+export async function getPublishedWorkBySlug(db: Database, slug: string) {
+  return db
+    .select()
+    .from(workEntries)
+    .where(eq(workEntries.slug, slug))
+    .limit(1)
+    .then(res => res[0]);
+}
+
 export function getAllArticle(db: Database) {
   return db.select().from(articleArticles).orderBy(desc(articleArticles.updatedAt));
 }

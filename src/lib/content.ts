@@ -174,3 +174,36 @@ export async function getPublicWork(): Promise<PublicWork[]> {
     publishedAt: entry.publishedAt,
   }));
 }
+
+export type PublicWorkEntry = PublicWork & {
+  body: string;
+  updatedAt: Date;
+};
+
+export async function getPublicWorkSlugs(): Promise<string[]> {
+  const work = await getPublicWork();
+  return work.map((w) => w.slug);
+}
+
+export async function getPublicWorkEntry(slug: string): Promise<PublicWorkEntry | null> {
+  const connectionString = process.env.DATABASE_URL;
+  if (!connectionString) return null;
+
+  const { getPublishedWorkBySlug } = await import("@/db/queries");
+  const entry = await getPublishedWorkBySlug(createDb(connectionString), slug);
+
+  if (!entry || entry.status !== "published") return null;
+
+  return {
+    id: entry.id,
+    slug: entry.slug,
+    type: entry.type,
+    title: entry.title,
+    summary: entry.summary,
+    externalUrl: entry.externalUrl,
+    repositoryUrl: entry.repositoryUrl,
+    publishedAt: entry.publishedAt,
+    body: entry.body,
+    updatedAt: entry.updatedAt,
+  };
+}
