@@ -71,9 +71,7 @@ export function PublicSidebar() {
           href="https://github.com/vxnuslabs" 
           target="_blank" 
           rel="noopener noreferrer" 
-          style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#777', textDecoration: 'none', marginBottom: '1.5rem', fontSize: '0.8rem', letterSpacing: '0.05em', fontWeight: 500 }}
-          onMouseOver={(e) => e.currentTarget.style.color = '#fff'}
-          onMouseOut={(e) => e.currentTarget.style.color = '#777'}
+          className="sidebar-github-link"
           aria-label="VXNUS on GitHub (vxnuslabs)"
         >
           <GithubIcon size={18} />

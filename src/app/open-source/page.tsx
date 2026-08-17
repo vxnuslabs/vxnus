@@ -21,20 +21,7 @@ export default async function OpenSourcePage() {
           href={site.github.url}
           target="_blank"
           rel="noopener noreferrer"
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "0.5rem",
-            padding: "0.5rem 0.85rem",
-            border: "1px solid var(--line)",
-            borderRadius: "4px",
-            fontSize: "0.78rem",
-            fontFamily: '"Courier New", Courier, monospace',
-            color: "var(--foreground)",
-            textDecoration: "none",
-            transition: "all 0.2s",
-            background: "rgba(255, 255, 255, 0.02)",
-          }}
+          className="opensource-github-banner"
           aria-label="Visit vxnuslabs on GitHub"
         >
           <GithubIcon size={16} />

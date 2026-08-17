@@ -21,14 +21,7 @@ export function PublicFooter() {
             href={site.github.url}
             target="_blank"
             rel="noopener noreferrer"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.35rem',
-              color: 'inherit',
-              textDecoration: 'none',
-              transition: 'color 0.2s',
-            }}
+            className="footer-github-link"
             aria-label="GitHub repository: vxnuslabs"
           >
             <GithubIcon size={14} />

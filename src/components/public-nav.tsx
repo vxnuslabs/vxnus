@@ -25,16 +25,6 @@ export function PublicNav() {
           target="_blank" 
           rel="noopener noreferrer"
           className="utility-github-link"
-          style={{ 
-            display: 'inline-flex', 
-            alignItems: 'center', 
-            gap: '0.4rem', 
-            color: 'var(--muted)', 
-            textDecoration: 'none', 
-            transition: 'color 0.2s' 
-          }}
-          onMouseOver={(e) => e.currentTarget.style.color = 'var(--foreground)'}
-          onMouseOut={(e) => e.currentTarget.style.color = 'var(--muted)'}
           aria-label="GitHub: vxnuslabs"
         >
           <GithubIcon size={14} />
