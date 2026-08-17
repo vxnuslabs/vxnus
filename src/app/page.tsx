@@ -2,7 +2,8 @@ import Link from "next/link";
 
 import { PublicPage } from "@/components/public-page";
 import { ArticleList } from "@/components/article-list";
-import { getPublicProfile, getPublicArticle } from "@/lib/content";
+import { WorkList } from "@/components/work-list";
+import { getPublicProfile, getPublicArticle, getPublicWork } from "@/lib/content";
 import { createMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
@@ -15,7 +16,10 @@ export const metadata = createMetadata({
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  const [profile, article] = await Promise.all([getPublicProfile(), getPublicArticle()]);
+  const [profile, article, work] = await Promise.all([getPublicProfile(), getPublicArticle(), getPublicWork()]);
+
+  const projects = work.filter((w) => w.type === "project");
+  const openSource = work.filter((w) => w.type === "open_source");
 
   return (
     <PublicPage>
@@ -34,23 +38,31 @@ export default async function Home() {
           <div className="intro-rule" aria-hidden="true" />
         </section>
 
-        <section className="home-article" aria-labelledby="latest-article">
+        <section className="home-projects" aria-labelledby="latest-projects">
           <div className="section-topline">
-            <h2 id="latest-article">Latest article</h2>
-            <Link href="/article">Article archive <span aria-hidden="true">→</span></Link>
+            <h2 id="latest-projects">What VXNUS is making</h2>
+            <Link href="/projects">All projects <span aria-hidden="true">→</span></Link>
           </div>
-          <ArticleList articles={article} />
+          <WorkList work={projects} emptyMessage="Selected projects will appear here as they reach a publishable state." />
         </section>
 
         <section className="home-manifesto" aria-labelledby="manifesto">
           <div>
             <p className="meta-line">A working position</p>
-            <h2 id="manifesto">Article is the beginning of better products.</h2>
+            <h2 id="manifesto">Research is the beginning of better products.</h2>
           </div>
           <p>
             We preserve what works, remove unnecessary friction, and change our minds when
             evidence asks us to.
           </p>
+        </section>
+
+        <section className="home-article" aria-labelledby="latest-article">
+          <div className="section-topline">
+            <h2 id="latest-article">Research & Notes</h2>
+            <Link href="/article">Article archive <span aria-hidden="true">→</span></Link>
+          </div>
+          <ArticleList articles={article} />
         </section>
 
         <section className="home-areas" aria-labelledby="areas-of-work">
@@ -66,6 +78,14 @@ export default async function Home() {
               </li>
             ))}
           </ul>
+        </section>
+
+        <section className="home-opensource" aria-labelledby="open-source">
+          <div className="section-topline">
+            <h2 id="open-source">Open Source</h2>
+            <Link href="/open-source">All repositories <span aria-hidden="true">→</span></Link>
+          </div>
+          <WorkList work={openSource} emptyMessage="Selected open-source artifacts will appear here as they are published." />
         </section>
       </main>
     </PublicPage>

@@ -50,9 +50,9 @@ export type PublicWork = {
 
 const fallbackProfile: PublicProfile = {
   name: "VXNUS",
-  positioning: "Technology Creative Studio",
+  positioning: "Creative Technology Studio",
   introduction:
-    "Trying the untried and finishing the unfinished. We explore the frontiers of technology, focusing on Artificial Intelligence, AI Companions, and intelligent characters.",
+    "Trying the untried and finishing the unfinished. We explore the frontiers of technology, focusing on Artificial Intelligence, AI companions, and intelligent characters.",
   principles: [
     "Try the untried.",
     "Finish the unfinished.",
@@ -61,11 +61,12 @@ const fallbackProfile: PublicProfile = {
     "Push the boundaries of AI interaction.",
   ],
   areasOfWork: [
-    "Artificial Intelligence",
+    "Research",
     "AI Companions",
-    "AI Characters",
-    "Interactive Technology",
-    "Digital Experiences",
+    "Intelligent Characters",
+    "Interactive Systems",
+    "Software/Tools",
+    "Experiments",
   ],
 };
 

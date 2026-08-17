@@ -15,15 +15,18 @@ export default async function AboutPage() {
     <ArchivePage title="About the studio" description={profile.positioning}>
       <div className="about-grid">
         <section>
-          <h2>What we do</h2>
+          <h2>About VXNUS</h2>
           <p className="reading-copy">{profile.introduction}</p>
+        </section>
+        <section>
+          <h2>What We Explore</h2>
           <p className="reading-copy">
-            Products are one outcome of article, not the goal itself. We work across software,
+            Products are one outcome of research, not the goal itself. We work across software,
             tools, and knowledge systems.
           </p>
         </section>
         <section>
-          <h2>How we work</h2>
+          <h2>How We Work</h2>
           <ol className="principle-list">
             {profile.principles.map((principle, index) => (
               <li key={principle}>
@@ -32,6 +35,13 @@ export default async function AboutPage() {
               </li>
             ))}
           </ol>
+        </section>
+        <section>
+          <h2>Origin & Founder</h2>
+          <p className="reading-copy">
+            VXNUS was founded by <a href="https://krzgn.xyz" target="_blank" rel="noopener noreferrer">Kur Zagin</a>. 
+            It is the studio through which this work is researched, developed, and published.
+          </p>
         </section>
       </div>
     </ArchivePage>

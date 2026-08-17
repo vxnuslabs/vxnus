@@ -80,6 +80,11 @@ export function PublicSidebar() {
         </a>
         <div className="copyright">
           <div>© VXNUS STUDIO</div>
+          <div style={{ marginTop: "0.25rem", marginBottom: "0.25rem" }}>
+            <a href="https://krzgn.xyz" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>
+              Founded by Kur Zagin ↗
+            </a>
+          </div>
           <div>ALL RIGHTS RESERVED</div>
         </div>
       </div>
