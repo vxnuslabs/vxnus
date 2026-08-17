@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { GithubIcon } from "./github-icon";
 import type { PublicWork } from "@/lib/content";
 
 export function WorkList({ work, emptyMessage }: { work: PublicWork[], emptyMessage: string }) {
@@ -22,8 +23,15 @@ export function WorkList({ work, emptyMessage }: { work: PublicWork[], emptyMess
           </div>
           <div className="article-detail">
             {item.repositoryUrl && (
-              <a href={item.repositoryUrl} target="_blank" rel="noopener noreferrer" aria-label={`View ${item.title} source code`}>
-                Source Code <span aria-hidden="true">→</span>
+              <a 
+                href={item.repositoryUrl} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label={`View ${item.title} source code`}
+                style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}
+              >
+                <GithubIcon size={13} />
+                <span>Source <span aria-hidden="true">→</span></span>
               </a>
             )}
             {item.externalUrl && !item.repositoryUrl && (

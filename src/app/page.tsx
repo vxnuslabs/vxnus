@@ -3,6 +3,7 @@ import Link from "next/link";
 import { PublicPage } from "@/components/public-page";
 import { ArticleList } from "@/components/article-list";
 import { WorkList } from "@/components/work-list";
+import { GithubIcon } from "@/components/github-icon";
 import { getPublicProfile, getPublicArticle, getPublicWork } from "@/lib/content";
 import { createMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
@@ -82,7 +83,39 @@ export default async function Home() {
 
         <section className="home-opensource" aria-labelledby="open-source">
           <div className="section-topline">
-            <h2 id="open-source">Open Source</h2>
+            <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", flexWrap: "wrap" }}>
+              <h2 id="open-source">Open Source</h2>
+              <a
+                href={site.github.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "0.35rem",
+                  fontSize: "0.72rem",
+                  fontFamily: '"Courier New", Courier, monospace',
+                  color: "var(--muted)",
+                  textDecoration: "none",
+                  padding: "0.15rem 0.5rem",
+                  border: "1px solid var(--line)",
+                  borderRadius: "2px",
+                  transition: "all 0.2s",
+                }}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.borderColor = "var(--foreground)";
+                  e.currentTarget.style.color = "var(--foreground)";
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.borderColor = "var(--line)";
+                  e.currentTarget.style.color = "var(--muted)";
+                }}
+                aria-label="GitHub repository: vxnuslabs"
+              >
+                <GithubIcon size={13} />
+                <span>{site.github.name} ↗</span>
+              </a>
+            </div>
             <Link href="/open-source">All repositories <span aria-hidden="true">→</span></Link>
           </div>
           <WorkList work={openSource} emptyMessage="Selected open-source artifacts will appear here as they are published." />

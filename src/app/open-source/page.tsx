@@ -1,7 +1,9 @@
 import { ArchivePage } from "@/components/archive-page";
 import { WorkList } from "@/components/work-list";
+import { GithubIcon } from "@/components/github-icon";
 import { getPublicWork } from "@/lib/content";
 import { createMetadata } from "@/lib/seo";
+import { site } from "@/lib/site";
 
 export const metadata = createMetadata({
   title: "Open source",
@@ -14,7 +16,33 @@ export default async function OpenSourcePage() {
 
   return (
     <ArchivePage title="Open source" description="Tools and systems shared for others to inspect and use.">
+      <div style={{ marginBottom: "2.5rem", marginTop: "-0.5rem" }}>
+        <a
+          href={site.github.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "0.5rem",
+            padding: "0.5rem 0.85rem",
+            border: "1px solid var(--line)",
+            borderRadius: "4px",
+            fontSize: "0.78rem",
+            fontFamily: '"Courier New", Courier, monospace',
+            color: "var(--foreground)",
+            textDecoration: "none",
+            transition: "all 0.2s",
+            background: "rgba(255, 255, 255, 0.02)",
+          }}
+          aria-label="Visit vxnuslabs on GitHub"
+        >
+          <GithubIcon size={16} />
+          <span>{site.github.name} on GitHub ↗</span>
+        </a>
+      </div>
       <WorkList work={work} emptyMessage="No open-source work has been published yet." />
     </ArchivePage>
   );
 }
+

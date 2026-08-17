@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 
 import { ArticleBody } from "@/components/article-body";
 import { CopyMarkdownButton } from "@/components/copy-markdown-button";
+import { GithubIcon } from "@/components/github-icon";
 import { PublicPage } from "@/components/public-page";
 import {
   getPublicWorkEntry,
@@ -59,7 +60,15 @@ export default async function OpenSourceEntryPage({ params }: WorkPageProps) {
           </div>
           <div className="article-topics" style={{ marginTop: "1rem" }}>
             {work.repositoryUrl && (
-              <a href={work.repositoryUrl} target="_blank" rel="noopener noreferrer">Source Code</a>
+              <a 
+                href={work.repositoryUrl} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                style={{ display: "inline-flex", alignItems: "center", gap: "0.35rem" }}
+              >
+                <GithubIcon size={14} />
+                <span>Source Code</span>
+              </a>
             )}
             {work.externalUrl && (
               <a href={work.externalUrl} target="_blank" rel="noopener noreferrer">View Link</a>

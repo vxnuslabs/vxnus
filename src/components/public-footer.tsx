@@ -1,5 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
+import { GithubIcon } from "./github-icon";
+import { site } from "@/lib/site";
 
 export function PublicFooter() {
   return (
@@ -13,10 +15,30 @@ export function PublicFooter() {
       </div>
       <div className="footer-meta">
         <span>Article is the beginning of better products.</span>
-        <Link href="/about">About the studio</Link>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', flexWrap: 'wrap' }}>
+          <Link href="/about">About the studio</Link>
+          <a
+            href={site.github.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.35rem',
+              color: 'inherit',
+              textDecoration: 'none',
+              transition: 'color 0.2s',
+            }}
+            aria-label="GitHub repository: vxnuslabs"
+          >
+            <GithubIcon size={14} />
+            <span>{site.github.name}</span>
+          </a>
+        </div>
       </div>
       <p className="footer-copyright">© VXNUS Studio</p>
     </footer>
   );
 }
+
 

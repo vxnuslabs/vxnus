@@ -1,6 +1,8 @@
 import { ArchivePage } from "@/components/archive-page";
+import { GithubIcon } from "@/components/github-icon";
 import { getPublicProfile } from "@/lib/content";
 import { createMetadata } from "@/lib/seo";
+import { site } from "@/lib/site";
 
 export const metadata = createMetadata({
   title: "About",
@@ -39,8 +41,30 @@ export default async function AboutPage() {
         <section>
           <h2>Origin & Founder</h2>
           <p className="reading-copy">
-            VXNUS was founded by <a href="https://krzgn.xyz" target="_blank" rel="noopener noreferrer">Kur Zagin</a>. 
+            VXNUS was founded by <a href={site.founder.url} target="_blank" rel="noopener noreferrer">{site.founder.name}</a>. 
             It is the studio through which this work is researched, developed, and published.
+          </p>
+        </section>
+        <section>
+          <h2>Code & Open Source</h2>
+          <p className="reading-copy">
+            Public repositories and open software experiments are maintained and published under{" "}
+            <a
+              href={site.github.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.35rem",
+                fontWeight: 500,
+              }}
+              aria-label="GitHub repository: vxnuslabs"
+            >
+              <GithubIcon size={15} style={{ display: "inline-block", verticalAlign: "-2px" }} />
+              <span>{site.github.name} ↗</span>
+            </a>
+            .
           </p>
         </section>
       </div>
