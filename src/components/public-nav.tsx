@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { GithubIcon } from "./github-icon";
 
 export function PublicNav() {
   const [time, setTime] = useState("");
@@ -19,19 +18,7 @@ export function PublicNav() {
       <div className="time-display">UTC+7 {time}</div>
       <div className="header-note">TECHNOLOGY / IMAGINATION / UNIVERSE</div>
       <Link href="/" className="mobile-brand" style={{ textDecoration: 'none', color: 'inherit' }}>VXNUS</Link>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
-        <a 
-          href="https://github.com/vxnuslabs" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="utility-github-link"
-          aria-label="GitHub: vxnuslabs"
-        >
-          <GithubIcon size={14} />
-          <span>vxnuslabs</span>
-        </a>
-        <div className="stay-curious">STAY CURIOUS</div>
-      </div>
+      <div className="stay-curious">STAY CURIOUS</div>
     </header>
   );
 }
