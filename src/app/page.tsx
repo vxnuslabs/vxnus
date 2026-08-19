@@ -10,7 +10,6 @@ import { createMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
 export const metadata = createMetadata({
-  title: site.name,
   description: site.description,
   path: "/",
 });

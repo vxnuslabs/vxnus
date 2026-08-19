@@ -4,7 +4,7 @@ import type { PublicArticleArticle } from "./content";
 import { site } from "./site";
 
 export function createMetadata(input: {
-  title: string;
+  title?: string;
   description: string;
   path?: string;
 }): Metadata {
