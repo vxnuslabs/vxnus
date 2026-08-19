@@ -5,6 +5,7 @@ import { ArticleBody } from "@/components/article-body";
 import { CopyMarkdownButton } from "@/components/copy-markdown-button";
 import { GithubIcon } from "@/components/github-icon";
 import { PublicPage } from "@/components/public-page";
+import { WorkJsonLd } from "@/components/work-json-ld";
 import {
   getPublicWorkEntry,
   getPublicWorkSlugs,
@@ -26,10 +27,13 @@ export async function generateMetadata({ params }: WorkPageProps) {
   const work = await getPublicWorkEntry(slug);
 
   if (!work) return {};
-  return {
+  
+  const { createMetadata } = await import("@/lib/seo");
+  return createMetadata({
     title: work.title,
     description: work.summary,
-  };
+    path: `/open-source/${work.slug}`,
+  });
 }
 
 export default async function OpenSourceEntryPage({ params }: WorkPageProps) {
@@ -40,6 +44,7 @@ export default async function OpenSourceEntryPage({ params }: WorkPageProps) {
 
   return (
     <PublicPage>
+      <WorkJsonLd work={work} />
       <article className="article-page">
         <nav className="article-breadcrumbs" aria-label="Breadcrumb">
           <Link href="/">Home</Link>

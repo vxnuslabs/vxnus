@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { HomeJsonLd } from "@/components/home-json-ld";
 import { PublicPage } from "@/components/public-page";
 import { ArticleList } from "@/components/article-list";
 import { WorkList } from "@/components/work-list";
@@ -24,6 +25,7 @@ export default async function Home() {
 
   return (
     <PublicPage>
+      <HomeJsonLd profile={profile} />
       <main>
         <section className="home-intro">
           <p className="intro-kicker">{profile.positioning}</p>
