@@ -192,11 +192,13 @@ export async function saveWorkEntry(
 
   let result: { id: number; slug: string } | undefined;
   try {
-    result = await createWorkEntryDraft(getAdminDatabase(), input);
+    const id = Number(field(formData, "id"));
+    const { createWorkEntryDraft, updateWorkEntryDraft } = await import("@/db/queries");
+    result = id ? await updateWorkEntryDraft(getAdminDatabase(), id, input) : await createWorkEntryDraft(getAdminDatabase(), input);
   } catch (error) {
     return { error: error instanceof Error ? error.message : "The work entry could not be saved." };
   }
 
   if (!result) return { error: "The work entry could not be saved." };
-  redirect(`/admin/content?saved=created`);
+  redirect(`/admin/work/${result.id}/edit?saved=1`);
 }

@@ -113,3 +113,58 @@ export async function getAdminWork(): Promise<AdminWorkSummary[]> {
     updatedAt: entry.publishedAt ?? new Date(),
   }));
 }
+
+export type AdminWorkEntry = {
+  id: number;
+  slug: string;
+  type: "open_source" | "project";
+  title: string;
+  summary: string;
+  body: string;
+  externalUrl: string | null;
+  repositoryUrl: string | null;
+  status: "draft" | "published" | "archived";
+};
+
+export async function getAdminWorkEntry(id: number): Promise<AdminWorkEntry | null> {
+  const connectionString = process.env.DATABASE_URL;
+  if (connectionString) {
+    const { getAllWork } = await import("@/db/queries");
+    const db = createDb(connectionString);
+    const entries = await getAllWork(db);
+    const summary = entries.find((work) => work.id === id);
+    if (!summary) return null;
+
+    return {
+      id: summary.id,
+      slug: summary.slug,
+      type: summary.type as "open_source" | "project",
+      title: summary.title,
+      summary: summary.summary,
+      body: summary.body,
+      externalUrl: summary.externalUrl,
+      repositoryUrl: summary.repositoryUrl,
+      status: summary.status as "draft" | "published" | "archived",
+    };
+  }
+
+  const { getPublicWork, getPublicWorkEntry } = await import("@/lib/content");
+  const works = await getPublicWork();
+  const summary = works.find((work) => work.id === id);
+  if (!summary) return null;
+  
+  const publicWork = await getPublicWorkEntry(summary.slug);
+  if (!publicWork) return null;
+
+  return { 
+    id: publicWork.id,
+    slug: publicWork.slug,
+    type: publicWork.type as "open_source" | "project",
+    title: publicWork.title,
+    summary: publicWork.summary,
+    body: publicWork.body,
+    externalUrl: publicWork.externalUrl ?? null,
+    repositoryUrl: publicWork.repositoryUrl ?? null,
+    status: "published",
+  };
+}

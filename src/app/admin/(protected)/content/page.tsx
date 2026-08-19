@@ -66,7 +66,7 @@ export default async function AdminContentPage({ searchParams }: ContentPageProp
           {work.map((w) => (
             <div className="admin-record admin-record-with-actions" key={`work-${w.id}`}>
               <span className="admin-muted">{w.type === "open_source" ? "Open Source" : "Project"}</span>
-              <strong>{w.title}</strong>
+              <Link href={`/admin/work/${w.id}/edit`}><strong>{w.title}</strong></Link>
               <span className={`admin-status admin-status-${w.status}`}>{w.status}</span>
               <time dateTime={w.updatedAt.toISOString()}>{formatDate(w.updatedAt)}</time>
               <form className="admin-inline-actions" action={changeWorkStatus}>
